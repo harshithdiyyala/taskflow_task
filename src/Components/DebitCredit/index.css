@@ -1,0 +1,44 @@
+.debit-credit-container {
+    display:flex;
+    width:100%;
+    justify-content: center;
+    padding:15px;
+}
+.amount-container {
+    display:flex;
+    justify-content: space-between;
+    border-radius:15px;
+    padding:8px;
+    align-items: center;
+    margin-right:15px;
+    background-color: white;
+    flex-grow: 1;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.debit {
+    color: #FE5C73;
+    font-family: 'Inter';
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-right:10px;
+    display: flex;
+    align-items: center;
+
+}
+.credit {
+    color:#16dbaa;
+    font-family: 'Inter';
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-right:10px;
+    display: flex;
+    align-items: center;
+}

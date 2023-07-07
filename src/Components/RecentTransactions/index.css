@@ -1,0 +1,23 @@
+.latest-transaction-heading {
+    color: #333B69;
+    font-family: 'Inter';
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;    
+    text-align: left;
+    padding:8px;
+}
+.recent-transactions-container {
+    display:flex;
+    flex-direction: column;
+    margin-left:15px;
+
+}
+.transaction-list {
+    list-style-type:none;
+    margin:5px;
+    background-color: white;
+    border-radius:15px;
+    border:2px solid #e2e2e2;
+}

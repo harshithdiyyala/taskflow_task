@@ -1,0 +1,36 @@
+.profile-container {
+    display:flex;
+    background-color: white;
+    margin:10px;
+    border:2px solid #e2e2e2;
+    padding:20px;
+    border-radius:20px;
+}
+.profile-form {
+    display:flex;
+    flex-direction: column;
+    border:0px;
+    width:33%;
+}
+.profile-details-container {
+    display:flex;
+    justify-content: space-around;
+    
+}
+.profile-details-container > img {
+    align-self:flex-start;
+    padding:20px;
+    width:20%;
+}
+.profile-form > input {
+    border-radius: 15px;
+    border: 2px solid #DFEAF2;
+    background: #FFF;
+    color: #718EBF;
+    font-family: 'Inter';
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    
+}
