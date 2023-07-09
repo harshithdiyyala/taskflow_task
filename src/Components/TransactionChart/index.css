@@ -1,0 +1,30 @@
+.chart-container {
+    background-color: white;
+    
+    margin:10px;
+    border-radius:20px;
+    margin-top:8px;
+    overflow-x:auto;
+}
+.bar {
+    border-radius:18px;
+}
+.chart-page {
+    margin-left:15px;
+}
+.dollar {
+    padding-top:8px;
+}
+.amt {
+    color: #333B69;
+}
+.description {
+    color:#718EBF;
+
+    font-family: 'Inter';
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+padding-left:20px;
+}

@@ -11,10 +11,12 @@
     line-height: normal;
     align-items: center;
     width:100%;
+    border-bottom:1.5px solid #e2e2e2;
     
 }
 .details-container1 > p {
     text-align: center;
+    width:20%;
 }
 .list-item{
     display:flex;
@@ -60,4 +62,17 @@
     padding:10px;
     margin:10px;
 
+}
+
+@media(max-width:576px){
+    .details-container1  {
+        flex-direction: column;
+    }
+    .name-container {
+        width:100%;
+        justify-content: center;
+    }
+    .details-container1 > p {
+        width:100%;
+    }
 }

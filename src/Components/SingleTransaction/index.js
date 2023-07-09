@@ -6,8 +6,11 @@ import Cookies from 'js-cookie'
 import UpdateTransaction from '../UpdateTransaction'
 import {AiOutlineCloseCircle} from 'react-icons/ai'
 import './index.css'
+import { useState } from 'react'
 
 const SingleTransaction = (props) => {
+
+    const [success_msg,setMsg] = useState('');
     const {item} = props
     const {transaction_name,category,date,amount,type} = item 
     const newDate = new Date(date)
@@ -23,6 +26,9 @@ const SingleTransaction = (props) => {
     if (minutes < 10 || minutes === 0) hrs = "0"+minutes.toString();
     else minutes = minutes.toString();
     const finaldate = day +' '+ month+', '+hrs+'.'+minutes+ ' '+ap;
+
+    const token = Cookies.get('token');
+    
     
 
     const deleteTransaction = async() => {
@@ -44,6 +50,10 @@ const SingleTransaction = (props) => {
         
         if(response.ok === true){
             console.log('deletion successful');
+            setMsg('Data deleted Successfully');
+        }
+        else{
+            setMsg('Deletion Unsuccessful');
         }
     }
 
@@ -51,16 +61,16 @@ const SingleTransaction = (props) => {
     return(<li className='list-item'>
         <div className='details-container1'>
         <div className="name-container">
-            {type === 'debit' ?<BsFillArrowDownCircleFill color = '#16dbaa' size = '25'/>: <BsFillArrowUpCircleFill color = '#FE5C73' size = '25'/> }
+            {type === 'debit' ?<BsFillArrowDownCircleFill color = '#FE5C73' size = '25'/>: <BsFillArrowUpCircleFill color = '#16dbaa' size = '25'/> }
             <p className = 'transaction-name'>{transaction_name}</p>
         </div>
-        <p style ={{textAlign:'center',width:'20%'}}>{category}</p>
-        <p style ={{textAlign:'center',width:'20%'}}>{finaldate}</p>
+        <p >{category}</p>
+        <p >{finaldate}</p>
         {type === 'debit' ? <div className='debit'><span >-<BsCurrencyDollar size ='25'/></span><span>{amount}</span></div>:<div className='credit'><span >+<BsCurrencyDollar size ='25'/></span><span>{amount}</span></div>  }
         <div className='icons-container1'>
             <Popup
                 modal
-                trigger = {<button className='edit-btn' type = 'button'><FiEdit3 size = '25' color ='#2d60ff' className='icon'/></button>}
+                trigger = {<button className={`edit-btn ${token === '3'?'display':''}`} type = 'button'><FiEdit3 size = '25' color ='#2d60ff' className='icon'/></button>}
             >
                 {close => (
                     <>
@@ -69,7 +79,7 @@ const SingleTransaction = (props) => {
                     <h1 className='add-transaction-heading'>Update Transaction</h1>    
                     <button className='trans-type-btn1' onClick={() => close()}> <AiOutlineCloseCircle color = '#fe5c73' size = '25'/> </button>
                     </div>
-                    <UpdateTransaction id = {item.id}/>
+                    <UpdateTransaction  item = {item}/>
                 </div> 
                     
                     </>
@@ -77,7 +87,7 @@ const SingleTransaction = (props) => {
             </Popup>
             <Popup
                 modal
-                trigger = {<button className='edit-btn' type = 'button'><MdDelete size = '25' color = '#fe5c73' className='icon'/></button>}
+                trigger = {<button className={`edit-btn ${token === '3'?'display':''}`} type = 'button'><MdDelete size = '25' color = '#fe5c73' className='icon'/></button>}
             >
                 {close => (
                     <>
@@ -94,7 +104,7 @@ const SingleTransaction = (props) => {
                         <button className='trigger-button' onClick={()=> close()}>Cancel</button>
                     </div>
                     </div> 
-                    
+                    {success_msg !== ''?<p className='errorMsg'>{success_msg}</p>:''}
                     </>
                 )}
             </Popup>

@@ -1,5 +1,6 @@
+import notfound from '../images/notfound.jpg'
 const NotFound = () => {
-    return(<h1>Not Found</h1>)
+    return(<img src = {notfound} alt = 'notfound' style = {{height:'100vh',width:'100vw'}}/>)
 }
 
 export default NotFound

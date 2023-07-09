@@ -2,7 +2,7 @@
     display:flex;
     background-color: white;
     margin:10px;
-    border:2px solid #e2e2e2;
+    
     padding:20px;
     border-radius:20px;
 }
@@ -33,4 +33,21 @@
     font-weight: 400;
     line-height: normal;
     
+}
+@media(max-width:576px){
+    .profile-container {
+        flex-direction: column;
+        width:100%;
+        
+    }
+    .profile-details-container {
+        flex-direction: column;
+        flex-grow:1;
+    }
+    .profile-form{
+        width:100%;
+    }
+    .profile-details-container > img {
+        margin:auto;
+    }
 }

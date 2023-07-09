@@ -2,7 +2,8 @@
     display:flex;
     width:100%;
     justify-content: center;
-    padding:15px;
+    
+    
 }
 .amount-container {
     display:flex;
@@ -18,6 +19,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    margin:20px;
 }
 .debit {
     color: #FE5C73;
@@ -41,4 +43,9 @@
     margin-right:10px;
     display: flex;
     align-items: center;
+}
+@media(max-width:576px){
+    .debit-credit-container{
+        flex-direction: column;
+    }
 }

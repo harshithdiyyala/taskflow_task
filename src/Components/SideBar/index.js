@@ -13,7 +13,7 @@ import Popup from 'reactjs-popup'
 
 class SideBar extends Component {
 
-    state = {id:0,name:'',email:''} 
+    state = {id:0,name:'',email:'',type :'dashboard'} 
 
     logout = () => {
         const {history} = this.props
@@ -47,9 +47,11 @@ class SideBar extends Component {
         
     }
 
-    render(){
-        const {id,name,email} = this.state
+    
 
+    render(){
+        const {id,name,email,type} = this.state
+        console.log(type);
         return(<div className='side-bar'>
             <div className='logo-container-side-bar'>
                 <img src = {myImage} alt ='logo' className='logo-image' />
@@ -58,16 +60,15 @@ class SideBar extends Component {
             <div className='link-container'>
                 <ul >
                     <li >
-                        <HiHome className='icon' size ='30' />
-                        <Link to ='/' className='link'>Dashboard</Link>
+                        <Link to ='/' className={`link-instance `}> <HiHome className={`icon ${this.props.name === 'Accounts' ? 'highlight1':''}`} size ='30' /><h1 className={`link ${this.props.name === 'Accounts' ? 'highlight':''}`}>Dashboard</h1></Link>
                     </li>
-                    <li>
-                        <AiOutlineTransaction className='icon' size ='30' />
-                        <Link to ='/transactions' className='link'>Transactions</Link>
+                    <li >
+                        
+                        <Link to ='/transactions' className={`link-instance`}> <AiOutlineTransaction className={`icon ${this.props.name === 'transactions' ? 'highlight1':''}`}  size ='30' /><h1 className={`link ${this.props.name === 'transactions' ? 'highlight':''}`}>Transactions</h1></Link>
                     </li>
-                    <li>
-                        <BsFillPersonFill className='icon' size ='30'/>
-                        <Link to ='/profile' className='link'>Profile</Link>
+                    <li >
+                        
+                        <Link to ='/profile' className={`link-instance`}> <BsFillPersonFill className={`icon ${this.props.name === 'profile' ? 'highlight1':''}`}  size ='30' /><h1 className={`link ${this.props.name === 'profile' ? 'highlight':''}`}>Profile</h1></Link>
                     </li>
                 </ul>
                 </div>  

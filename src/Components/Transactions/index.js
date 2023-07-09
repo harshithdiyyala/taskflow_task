@@ -8,7 +8,7 @@ import './index.css'
 
 class Transactions extends Component {
 
-    state = {initialtransactions:[],alltransactions:[],isLoading:true,type:'all'}
+    state = {initialtransactions:[],alltransactions:[],isLoading:true,type:'all',msg:''}
     componentDidMount() {
         this.getAllTransactions();
     }
@@ -35,8 +35,11 @@ class Transactions extends Component {
             const data = await response.json();
             const {transactions} = data ;
             
-            if(response.ok === true){
+            if(response.ok === true && transactions.length >0){
                 this.setState({alltransactions:transactions,initialtransactions:transactions,isLoading:false})
+            }
+            else {
+                this.setState({msg:'No Transactions....',isLoading:false})
             }
 
     }
@@ -66,31 +69,32 @@ class Transactions extends Component {
         const {initialtransactions} = this.state
         if (event.target.value === 'debit'){
                 let data = initialtransactions.filter(item => item.type === 'debit')
-                this.setState({alltransactions:data})
+                this.setState({alltransactions:data,type:'debit'})
         }
         else if (event.target.value === 'credit'){
             let data = initialtransactions.filter(item => item.type === 'credit')
-            this.setState({alltransactions:data})
+            this.setState({alltransactions:data,type:'credit'})
         }
         else{
-            this.setState({alltransactions:initialtransactions})
+            this.setState({alltransactions:initialtransactions,type:'all'})
         }
 
     }
 
     render() {
-        const {isLoading} = this.state
+        const {isLoading,msg,type} = this.state
+        
         return(<div className='dashboard-page'>
-        <div><SideBar/></div>
+        <SideBar name = 'transactions'/>
         <div className='dashboard-container'>
                 <TopBar name = 'Transactions'/>
                 <div className='select-transaction-type-bar'>
-                        <button onClick = {this.updateTransactionType} value = 'all' className='trans-type-btn'> All Transactions</button>
-                        <button onClick = {this.updateTransactionType} value = 'debit' className='trans-type-btn'>Debit</button>
-                        <button onClick = {this.updateTransactionType} value = 'credit' className='trans-type-btn'>Credit</button>
+                        <button onClick = {this.updateTransactionType} value = 'all' className={`trans-type-btn ${type === 'all' ? 'highlight2':''}`}> All Transactions</button>
+                        <button onClick = {this.updateTransactionType} value = 'debit' className={`trans-type-btn ${type === 'debit' ? 'highlight2':''}`}>Debit</button>
+                        <button onClick = {this.updateTransactionType} value = 'credit' className={`trans-type-btn ${type === 'credit' ? 'highlight2':''}`}>Credit</button>
                 </div>
                 {isLoading ? this.renderLoading() : this.renderData()}
-                
+                {msg !== ''?<h1 className='latest-transaction-heading'>{msg}</h1>:''}
         </div>
     </div>)
     }

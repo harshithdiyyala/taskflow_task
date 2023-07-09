@@ -16,8 +16,9 @@ class DebitCredit extends Component{
 
     getAmount = async() => {
         const token = Cookies.get('token');
-        const url = 'https://bursting-gelding-24.hasura.app/api/rest/credit-debit-totals'
-        const options = {
+
+        const url = token === 3 ? 'https://bursting-gelding-24.hasura.app/api/rest/transaction-totals-admin':'https://bursting-gelding-24.hasura.app/api/rest/credit-debit-totals'
+        const options = token === 3 ? {
             method:'GET',
             headers: {
             
@@ -25,6 +26,17 @@ class DebitCredit extends Component{
                     'x-hasura-admin-secret':'g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF',
                     'x-hasura-role':'user',
                     'x-hasura-user-id':token
+                
+
+            }
+        }:{
+            method:'GET',
+            headers: {
+            
+                    'content-type':'application/json',
+                    'x-hasura-admin-secret':'g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF',
+                    'x-hasura-role':'admin',
+                    
                 
 
             }
@@ -45,7 +57,7 @@ class DebitCredit extends Component{
     render() {
         console.log('inside debit credit');
         const {credit,debit,isLoading} = this.state
-        return(<div className='debit-credit-container'>
+        return(<>
             <div className='amount-container'>
                 <div>
                 {isLoading ?<div> <ThreeDots type="ThreeDots" color="#0284c7" height={50} width={50} /></div>:<div className='credit'><span ><BsCurrencyDollar size ='25'/></span><span>{credit}</span></div> }
@@ -61,8 +73,7 @@ class DebitCredit extends Component{
                 </div>
                 <img src ={debitImg} alt = 'debit'/>
             </div>
-        </div>)
-    }
+        </>)   }
 }
 
 export default DebitCredit

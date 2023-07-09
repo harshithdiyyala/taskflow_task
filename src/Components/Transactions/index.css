@@ -15,7 +15,6 @@ text-align: center;
 }
 .transactions-container {
     background-color: white;
-    border:2px solid #e2e2e2;
     margin:10px;
     border-radius:20px;
     margin-top:8px;
@@ -32,4 +31,26 @@ text-align: center;
     line-height: normal;  
     margin-top:10px;  
     margin-bottom:10px;
+    width:200px;
+    margin-left:8px;
+}
+.select-transaction-type-bar {
+    display:flex;
+    flex-direction: row;
+}
+.highlight2 {
+    color:#2d60ff;
+    border-bottom:5px solid #2d60ff;
+    
+}
+@media(max-width:576px){
+    .transaction-header{
+        display:none;
+    }
+    .select-transaction-type-bar {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin:auto;
+    }
 }

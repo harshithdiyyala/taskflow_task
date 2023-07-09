@@ -1,6 +1,6 @@
 .add-transaction-heading {
     color: #333B69;
-font-family: Inter;
+font-family: 'Inter';
 font-size: 20px;
 font-style: normal;
 font-weight: 700;
@@ -8,4 +8,20 @@ line-height: 28px;
 }
 .form1 {
     overflow:auto;
+}
+.success-msg {
+    color:#16dbaa;
+    font-size: 20px;
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+line-height: 28px;
+}
+.select {
+    height:32px;
+    border-radius:10px;
+    border:2px solid #f5f7fa;
+    margin-bottom:16px;
+    padding-left:8px;
+    color: #505887;
 }

@@ -6,7 +6,7 @@ import './index.css'
 
 class RecentTransactions extends Component {
 
-    state = {transactions:[],isLoading:true}
+    state = {transactions:[],isLoading:true,error_msg:''}
 
     componentDidMount(){
         this.getTransactions()
@@ -32,15 +32,18 @@ class RecentTransactions extends Component {
             const response = await fetch(url,options);
             const data = await response.json();
             const {transactions} = data ;
-            console.log(data);
-            if(response.ok === true){
+            
+            if(response.ok === true && transactions.length >0){
                 this.setState({transactions,isLoading:false})
+            }else{
+                this.setState({error_msg:'No Transactions Occured Recently....',isLoading:false})
             }
 
     }
 
     render(){
-        const {transactions,isLoading} = this.state
+        const {transactions,isLoading,error_msg} = this.state
+        
 
         return(<div className='recent-transactions-container'>
             <h1 className='latest-transaction-heading'> Last Transaction</h1>
@@ -48,9 +51,11 @@ class RecentTransactions extends Component {
                 {isLoading ? <div style ={{margin:'auto'}}>
                  <TailSpin type="TailSpin" color="#0284c7" height={50} width={50} />
                     </div>:
-                <ul className = 'transaction-list'>  
-                    {transactions.map(item => <SingleTransaction key = {item.id} item ={item} />)}
-                </ul>
+                            ( transactions.length === 0 ? (<h1 className='latest-transaction-heading'>{error_msg}</h1>)
+                              :<ul className = 'transaction-list'>  
+                                {transactions.map(item => <SingleTransaction key = {item.id} item ={item} />)}
+                             </ul>
+                            )
                 }
             
         </div>)

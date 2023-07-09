@@ -5,7 +5,7 @@ import myImage from '../images/logo.jpg'
 import './index.css'
 
 class Login  extends Component{
-    state = {username:'',password:'',errorMsg:''}
+    state = {username:'',password:'',errorMsg:'',showPassword:false}
 
     updatePassword =  (event) => { this.setState({password:event.target.value})} 
 
@@ -41,9 +41,9 @@ class Login  extends Component{
             console.log(data);
             console.log(response.ok);
             const {get_user_id} = data;
-            console.log(get_user_id[0].id)
+            
 
-            if (response.ok === true){
+            if (response.ok === true && get_user_id.length > 0){
                     Cookies.set('token',get_user_id[0].id,{expires:30})
                     history.replace('/')
             }
@@ -55,7 +55,7 @@ class Login  extends Component{
 
     render() {
         
-        const {username,password,errorMsg} = this.state
+        const {username,password,errorMsg,showPassword} = this.state
         
         const token = Cookies.get('token')
         if (token !== undefined){
@@ -72,8 +72,8 @@ class Login  extends Component{
                     <label className='label' htmlFor='username'>USERNAME</label>
                     <input type= 'text' id = 'username' value = {username} placeholder = 'Enter User Name' onChange ={this.updateUserName}/>
                     <label className='label' htmlFor='pwd'>PASSWORD</label>
-                    <input type= 'password' id = 'pwd' value = {password} placeholder = 'Enter Password' onChange ={this.updatePassword}/>
-
+                    {showPassword ? <input type= 'text' id = 'pwd' value = {password} placeholder = 'Enter Password' onChange ={this.updatePassword}/>:<input type= 'password' id = 'pwd' value = {password} placeholder = 'Enter Password' onChange ={this.updatePassword}/>}
+                    <div className='show'><input type = 'checkbox' onClick = {() => this.setState((prevState) => ({showPassword:!prevState.showPassword}))} className='checkbox'/><label>SHOW PASSWORD</label></div>
                     <button type = 'submit' onClick={this.submitDetails}>LOGIN</button>
                 </form>
                 {errorMsg !== ''? <p className='errorMsg'>{errorMsg}</p> :''}    

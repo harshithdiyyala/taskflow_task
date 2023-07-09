@@ -8,32 +8,22 @@ class UpdateTransaction extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name:this.props.name,
-            type:this.props.type,
-            category:this.props.category,
-            amount:this.props.amount,
-            date:this.props.date,
+            id:props.item.id,
+            name:props.item.transaction_name,
+            type:props.item.type,
+            category:props.item.category,
+            amount:props.item.amount,
+            date:new Date(props.item.date).toLocaleDateString(),
             success_msg:'', 
-            id:this.props.id
         }
+        
     }
 
-    updateName =(event) => {
-        this.setState({name:event.target.value})
+    updateForm =(event) => {
+        this.setState({ [event.target.name ]: event.target.value})
 
     }
-    updatetype = (event) => {
-        this.setState({type:event.target.value})
-    }
-    updateCategory = event => {
-        this.setState({category:event.target.value})
-    }
-    updateAmount = event => {
-        this.setState({amount:event.target.value})
-    }
-    updateDate = (event)=> {
-        this.setState({date:event.target.value})
-    }
+    
     updateTransaction = async(event) => {
         event.preventDefault();
         const {name,type,category,amount,date,id} = this.state
@@ -55,7 +45,7 @@ class UpdateTransaction extends Component {
         //const data = await response.json();
         
         if (response.ok === true){
-            console.log('updation successful');
+            
             this.setState({success_msg:'Data Updation Successful'})
         }
         else {
@@ -64,10 +54,7 @@ class UpdateTransaction extends Component {
 
 
     }
-    componentDidMount() {
-        const {id} =  this.props
-        this.setState({id})
-    }
+    
 
     render(){
         const {name,type,category,amount,date,success_msg} = this.state
@@ -77,17 +64,25 @@ class UpdateTransaction extends Component {
             
             
             <form className='login-form form1'>
-                <label>Transaction Name</label>
-                <input type = 'text' value = {name} onChange = {this.updateName} />
+            <label>Transaction Name</label>
+                <input type = 'text' value = {name} onChange = {this.updateForm} name = 'name' placeholder='Enter Name'/>
                 <label>Transaction Type (debit/credit)</label>
-                <input type = 'text' value ={type} onChange ={this.updatetype} />
+                <select id="myDropdown" name="type" onChange ={this.updateForm} className='select' placeholder ='Enter Transaction Type' selected = {type}>
+                    <option value="debit" className='select'>Debit</option>
+                    <option value="credit" className='select'>Credit</option>    
+                </select>
                 <label>Category</label>
-                <input type = 'text' value = {category} onChange = {this.updateCategory} />
+                <select id="myDropdown1" name="category" onChange ={this.updateForm} className='select' placeholder ='Enter Category' selected ={category}>
+                    <option value="service" className='select'>Service</option>
+                    <option value="transfer" className='select'>Transfer</option>  
+                    <option value = 'expenses' className='select'>Expenses</option>  
+                    <option value = 'other' className='select'>Other</option>  
+                </select>
                 <label>Amount</label>
-                <input type = 'text' value = {amount} onChange = {this.updateAmount} />
+                <input type = 'text' value = {amount} onChange = {this.updateForm} name='amount' placeholder='Enter Amount'/>
                 <label>Date</label>
-                <input type = 'date' value = {date} onChange = {this.updateDate} />
-                <button type = 'button' onClick={this.updateTransaction}> Submit</button>
+                <input type = 'date' value = {date} onChange = {this.updateForm} name = 'date' placeholder = 'Select Date'/>
+                <button type = 'button' onClick={this.updateTransaction}> Add Transaction</button>
             </form>
             {success_msg !== ''? <p> {success_msg}</p>:'' }
         </div>)

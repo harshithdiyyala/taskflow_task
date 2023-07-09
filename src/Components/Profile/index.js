@@ -8,7 +8,7 @@ import './index.css'
 
 class Profile extends Component {
 
-    state = {isLoading:true,allDetails:[]}
+    state = {isLoading:true,allDetails:[],error:''}
 
     componentDidMount() {
         this.getProfileDetails()
@@ -30,9 +30,11 @@ class Profile extends Component {
         const data = await response.json();
         
         const {users} = data
-        console.log(users);
-        if (response.ok === true){
+        
+        if (response.ok === true && users.length >0){
             this.setState({allDetails:users,isLoading:false})
+        }else{
+            this.setState({error:'Profile Details Unavailable',isLoading:false})
         }
     }
 
@@ -73,13 +75,14 @@ class Profile extends Component {
     }
 
     render(){
-        const {isLoading} = this.state
+        const {isLoading,error} = this.state
         return(<div className='dashboard-page'>
-            <div><SideBar/></div>
+            <SideBar name = 'profile'/>
             <div className='dashboard-container'>
                     <TopBar name = 'Profile'/>
                     <div className='profile-container'>
                         {isLoading ? this.renderLoading() : this.renderData()}
+                        {error !== ''?<h1 className='latest-transaction-heading'>{error}</h1>:'' }
                     </div>
             </div>
         </div>)
