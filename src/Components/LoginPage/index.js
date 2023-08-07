@@ -76,8 +76,8 @@ class Login  extends Component{
                     <div className='show'><input type = 'checkbox' onClick = {() => this.setState((prevState) => ({showPassword:!prevState.showPassword}))} className='checkbox'/><label>SHOW PASSWORD</label></div>
                     <button type = 'submit' onClick={this.submitDetails}>LOGIN</button>
                 </form>
-                <p className='errorMsg'> USERNAME: janedoe@gmail.com</p>
-                <p className='errorMsg'> PASSWORD: jane.doe@123</p>
+                <p className = 'errorMsg'> SAMPLE USERNNAME: jane.doe@gmail.com. </p>
+                <p className = 'errorMsg'> SAMPLE PASSWORD: janedoe@123 </p>
                 {errorMsg !== ''? <p className='errorMsg'>{errorMsg}</p> :''}    
             </div>
         </div>)
