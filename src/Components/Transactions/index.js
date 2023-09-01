@@ -9,6 +9,7 @@ import './index.css'
 class Transactions extends Component {
 
     state = {initialtransactions:[],alltransactions:[],isLoading:true,type:'all',msg:''}
+
     componentDidMount() {
         this.getAllTransactions();
     }
@@ -18,6 +19,7 @@ class Transactions extends Component {
         const queryParams = new URLSearchParams();
         queryParams.append('limit','150');
         queryParams.append('offset','0');
+        const abc = token === '3' ? 'admin':'user';
             
             const url = `https://bursting-gelding-24.hasura.app/api/rest/all-transactions?${queryParams.toString()}`
 
@@ -26,7 +28,7 @@ class Transactions extends Component {
                 headers :{
                     "Content-Type": "application/json",
                     "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF",
-                    "x-hasura-role":{token ==='3' ? "admin":"user"},
+                    "x-hasura-role":abc,
                     "x-hasura-user-id":token
                 }
             }
@@ -43,6 +45,8 @@ class Transactions extends Component {
             }
 
     }
+
+
     renderLoading = () => {
         return(<div style ={{margin:'auto'}}>
         <TailSpin type="TailSpin" color="#0284c7" height={50} width={50} />
@@ -65,6 +69,7 @@ class Transactions extends Component {
         </ul>
     </div>)
     }
+
     updateTransactionType = (event) => {
         const {initialtransactions} = this.state
         if (event.target.value === 'debit'){

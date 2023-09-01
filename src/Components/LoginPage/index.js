@@ -24,16 +24,16 @@ class Login  extends Component{
         }
         else{
             //console.log(typeof(username),password);
-            const queryParams = new URLSearchParams;
-            queryParams.append("email",username);
-            queryParams.append("password",password);
-            let url = `https://bursting-gelding-24.hasura.app/api/rest/get-user-id?${queryParams.toString()}`
+            
+            
+            let url = `https://bursting-gelding-24.hasura.app/api/rest/get-user-id`
             let options = {
+                method:'POST',
                 headers: {
                     "Content-Type": "application/json",
                     "x-hasura-admin-secret":"g08A3qQy00y8yFDq3y6N1ZQnhOPOa4msdie5EtKS1hFStar01JzPKrtKEzYY2BtF"
                 },
-                
+                body: JSON.stringify({email:username,password:password})
             }
 
             const response = await fetch(url,options);
