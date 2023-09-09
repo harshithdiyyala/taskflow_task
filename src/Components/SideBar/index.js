@@ -15,7 +15,7 @@ class SideBar extends Component {
 
     state = {id:0,name:'',email:'',type :'dashboard'} 
 
-    logout() {
+    logout =() =>  {
         const {history} = this.props
         Cookies.remove('token');
         history.replace('/login');
